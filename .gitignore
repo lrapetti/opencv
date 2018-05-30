@@ -24,4 +24,4 @@ bin/
 build
 
 # ignore kdevelop
-.kdev4
+*kdev4
