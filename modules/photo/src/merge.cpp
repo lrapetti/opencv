@@ -177,7 +177,7 @@ public:
             Mat img, gray, contrast, saturation, wellexp;
             std::vector<Mat> splitted(channels);
 
-            images[i].convertTo(img, CV_32F, 1.0f/255.0f);
+            images[i].convertTo(img, CV_32F, 1.0f/65535.0f);
             if(channels == 3) {
                 cvtColor(img, gray, COLOR_RGB2GRAY);
             } else {
@@ -204,7 +204,7 @@ public:
 
             wellexp = Mat::ones(size, CV_32F);
             for(int c = 0; c < channels; c++) {
-                Mat expo = splitted[c] - 0.5f;
+                Mat expo = splitted[c] - 0.52f;
                 pow(expo, 2.0f, expo);
                 expo = -expo / 0.08f;
                 exp(expo, expo);
@@ -228,7 +228,7 @@ public:
         for(size_t i = 0; i < images.size(); i++) {
             weights[i] /= weight_sum;
             Mat img;
-            images[i].convertTo(img, CV_32F, 1.0f/255.0f);
+            images[i].convertTo(img, CV_32F, 1.0f/65535.0f);
 
             std::vector<Mat> img_pyr, weight_pyr;
             buildPyramid(img, img_pyr, maxlevel);
